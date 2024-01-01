@@ -25,10 +25,10 @@ public class Main {
 
             } else if (isRomanNumeral(symbol)) {
                 if (operator.equals("")) {
-                    part1 = getRomanNumeral(symbol, part1);
+                    part1 += symbol;
                     roman = true;
                 } else if (roman == true) {
-                    part2 = getRomanNumeral(symbol, part2);
+                    part2 += symbol;
                 } else {
                     throw new Exception("Неприменимо одновременное использование арабских и римских чисел");
                 }
@@ -103,11 +103,6 @@ public class Main {
         } else {
             throw new Exception("Допустимы операции только с числами от 1 до 10 включительно");
         }
-    }
-
-    // метод для сборки римских чисел из входящих символов
-    public static String getRomanNumeral(String symbol, String num) throws Exception {
-        return num += symbol;
     }
 
     // метод для проверки корректности римских чисел
