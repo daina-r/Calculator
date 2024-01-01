@@ -96,7 +96,7 @@ public class Main {
         return symbol.matches("[+\\-*/]");
     }
 
-    // метод для сборки арабских чисел из входящих символов
+    // метод для проверки корректности арабских чисел
     public static String checkNumeric(String input) throws Exception {
         if (input.matches("[1-9]|10")) {
             return input;
