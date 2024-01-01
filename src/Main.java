@@ -107,12 +107,7 @@ public class Main {
 
     // метод для сборки римских чисел из входящих символов
     public static String getRomanNumeral(String symbol, String num) throws Exception {
-        if (num.equals("")) {
-            num += symbol;
-        } else {
-            num += symbol;
-        }
-
+        num += symbol;
         if (num.matches("X|IX|IV|V?I{0,3}")) {
             return num;
         } else {
