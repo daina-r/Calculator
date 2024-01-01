@@ -20,7 +20,7 @@ public class Main {
                 } else if (roman == false) {
                     part2 = getNumeric(symbol, part2);
                 } else {
-                    throw new Exception("Одновременное использование арабских и римских чисел");
+                    throw new Exception("Неприменимо одновременное использование арабских и римских чисел");
                 }
 
             } else if (isRomanNumeral(symbol)) {
@@ -30,7 +30,7 @@ public class Main {
                 } else if (roman == true) {
                     part2 = getRomanNumeral(symbol, part2);
                 } else {
-                    throw new Exception("Одновременное использование арабских и римских чисел");
+                    throw new Exception("Неприменимо одновременное использование арабских и римских чисел");
                 }
 
             } else if (isOperator(symbol)) {
@@ -48,8 +48,8 @@ public class Main {
         // приводим тип переменных к целочисленному
         if (operator != "" && part1 != "" && part2 != "") {
             if (roman == true) {
-                num1 = convertRomanToArabic(part1);
-                num2 = convertRomanToArabic(part2);
+                num1 = convertRomanToArabic(checkRomanNumeral(part1));
+                num2 = convertRomanToArabic(checkRomanNumeral(part2));
             } else {
                 num1 = Integer.parseInt(part1);
                 num2 = Integer.parseInt(part2);
@@ -107,11 +107,14 @@ public class Main {
 
     // метод для сборки римских чисел из входящих символов
     public static String getRomanNumeral(String symbol, String num) throws Exception {
-        num += symbol;
+        return num += symbol;
+    }
 
-        if (num.matches("X|IX|IV|V?I{0,3}")) {
-            return num;
-        } else if (num.matches("^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")) {
+    // метод для проверки корректности римских чисел
+    public static String checkRomanNumeral(String input) throws Exception {
+        if (input.matches("X|IX|IV|V?I{0,3}")) {
+            return input;
+        } else if (input.matches("^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")) {
             throw new Exception("Допустимы операции только с числами от I до X включительно");
         } else {
             throw new Exception("Некорректный ввод римских чисел");
