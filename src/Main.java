@@ -81,12 +81,12 @@ public class Main {
         }
     }
 
-    // метод для проверки, принадлежит ли символ арабскому числу от 1 до 10
+    // метод для проверки, соответствует ли символ арабской цифре
     public static boolean isNumeric(String symbol) {
         return symbol.matches("[0-9]");
     }
 
-    // метод для проверки, принадлежит ли символ римскому числу от I до X
+    // метод для проверки, соответствует ли символ римской цифре
     public static boolean isRomanNumeral(String symbol) {
         return symbol.matches("[IVXLCDM]");
     }
