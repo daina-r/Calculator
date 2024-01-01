@@ -16,9 +16,9 @@ public class Main {
 
             if (isNumeric(symbol)) {
                 if (operator.equals("")) {
-                    part1 = getNumeric(symbol, part1);
+                    part1 += symbol;
                 } else if (roman == false) {
-                    part2 = getNumeric(symbol, part2);
+                    part2 += symbol;
                 } else {
                     throw new Exception("Неприменимо одновременное использование арабских и римских чисел");
                 }
@@ -51,8 +51,8 @@ public class Main {
                 num1 = convertRomanToArabic(checkRomanNumeral(part1));
                 num2 = convertRomanToArabic(checkRomanNumeral(part2));
             } else {
-                num1 = Integer.parseInt(part1);
-                num2 = Integer.parseInt(part2);
+                num1 = Integer.parseInt(checkNumeric(part1));
+                num2 = Integer.parseInt(checkNumeric(part2));
             }
         } else {
                 throw new Exception("Некорректный ввод. Выражение должно иметь вид: a + b, a - b, a * b, a / b");
@@ -97,9 +97,9 @@ public class Main {
     }
 
     // метод для сборки арабских чисел из входящих символов
-    public static String getNumeric(String symbol, String num) throws Exception {
-        if (num.equals("") && !symbol.equals("0") || num.equals("1") && symbol.equals("0")) {
-            return num += symbol;
+    public static String checkNumeric(String input) throws Exception {
+        if (input.matches("[1-9]|10")) {
+            return input;
         } else {
             throw new Exception("Допустимы операции только с числами от 1 до 10 включительно");
         }
