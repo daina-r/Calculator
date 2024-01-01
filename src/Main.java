@@ -81,12 +81,12 @@ public class Main {
         }
     }
 
-    // метод для проверки, соответствует ли символ арабской цифре
+    // метод для проверки, является ли символ арабской цифрой
     public static boolean isNumeric(String symbol) {
         return symbol.matches("[0-9]");
     }
 
-    // метод для проверки, соответствует ли символ римской цифре
+    // метод для проверки, является ли символ римской цифрой
     public static boolean isRomanNumeral(String symbol) {
         return symbol.matches("[IVXLCDM]");
     }
@@ -108,23 +108,26 @@ public class Main {
     // метод для сборки римских чисел из входящих символов
     public static String getRomanNumeral(String symbol, String num) throws Exception {
         num += symbol;
+
         if (num.matches("X|IX|IV|V?I{0,3}")) {
             return num;
-        } else {
+        } else if (num.matches("^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")) {
             throw new Exception("Допустимы операции только с числами от I до X включительно");
+        } else {
+            throw new Exception("Некорректный ввод римских чисел");
         }
     }
 
     // Метод для конвертации римского числа в арабское
     public static int convertRomanToArabic(String input) {
-        String[] keys = {"I", "V", "X"};
+        char[] keys = {'I', 'V', 'X'};
         int[] values = {1, 5, 10};
         int result = 0;
         int prevValue = 0;
 
         for (int i = input.length() - 1; i >= 0; i--) {
             for (int j = 0; j < keys.length; j++) {
-                if (keys[j].equals(String.valueOf(input.charAt(i)))) {
+                if (keys[j] == (input.charAt(i))) {
                     int currentValue = values[j];
                     
                     if (currentValue < prevValue) {
@@ -141,21 +144,20 @@ public class Main {
     }
 
     // метод для конвертации арабского числа в римское
-    public static String convertArabicToRoman(String number) throws Exception {
-        String[] keys = {"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
-        int[] values = {100, 90, 50, 40, 10, 9, 5, 4, 1};
-        int num = Integer.parseInt(number);
+    public static String convertArabicToRoman(String input) throws Exception {
+        int[] keys = {100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] values = {"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int arabic = Integer.parseInt(input);
 
-        if (num < 1) {
+        if (arabic < 1) {
             throw new Exception("Римские числа не могут быть меньше единицы");
         } else {
             String roman = "";
 
-            for (int i = 0; i < values.length; i++) {
-                int arabic = values[i];
-                while (num >= arabic) {
-                    roman += keys[i];
-                    num -= arabic;
+            for (int i = 0; i < keys.length; i++) {
+                while (arabic >= keys[i]) {
+                    roman += values[i];
+                    arabic -= keys[i];
                 }
             }
             return roman;
