@@ -173,8 +173,7 @@ public class Main {
 
                 // получаем строку, убираем пробелы, приводим к верхнему регистру
                 String input = scanner.nextLine().replaceAll("\\s+", "").toUpperCase();
-                String result = calc(input);
-                System.out.println("Результат: " + result);
+                System.out.println("Результат: " + calc(input));
 
             } catch (Exception e) {
                 System.out.println("Ошибка: " + e.getMessage());
